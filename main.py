@@ -1,53 +1,40 @@
-# from fastapi import FastAPI
-# from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi import Request
+from pydantic import BaseModel
+import requests
 
-# app = FastAPI()
+# Mount output folder
+app.mount("/files", StaticFiles(directory="server/output"), name="files")
 
-# # Allow frontend to call API (we’ll connect React later)
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],  # You can restrict this to localhost later
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
-
-# @app.get("/")
-# def read_root():
-#     return {"message": "DFMEA GenAI platform is alive!"}
-
-
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from server.pipeline.end_to_end_pipeline import DFMEAEndToEndPipeline
-
-app = FastAPI()
-
-# Enable CORS (for later React UI)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/")
-def read_root():
-    return {"message": "DFMEA GenAI platform is alive!"}
+# Request model
+class DFMEARequest(BaseModel):
+    kb_url: str
+    fi_url: str
+    query: str = "Generate DFMEA entries for recent field failures"
 
 @app.post("/run_dfmea")
-def run_dfmea():
-    kb_path = "server/sample_files/dfmea_knowledge_bank_3.csv"
-    fi_path = "server/sample_files/field_reported_issues_3.xlsx"
-    query = "Generate DFMEA entries for recent field failures"
+def run_dfmea(req: DFMEARequest):
+    kb_path = "server/sample_files/kb_input.xlsx" if "xlsx" in req.kb_url else "server/sample_files/kb_input.csv"
+    fi_path = "server/sample_files/fi_input.xlsx" if "xlsx" in req.fi_url else "server/sample_files/fi_input.csv"
 
-    pipeline = DFMEAEndToEndPipeline(kb_path=kb_path, fi_path=fi_path, query=query, top_k=100)
+    os.makedirs("server/sample_files", exist_ok=True)
+
+    def download(url, path):
+        r = requests.get(url)
+        r.raise_for_status()
+        with open(path, "wb") as f:
+            f.write(r.content)
+
+    download(req.kb_url, kb_path)
+    download(req.fi_url, fi_path)
+
+    from server.pipeline.end_to_end_pipeline import DFMEAEndToEndPipeline
+
+    pipeline = DFMEAEndToEndPipeline(kb_path=kb_path, fi_path=fi_path, query=req.query)
     output_path = pipeline.run()
 
+    filename = os.path.basename(output_path)
     return {
         "status": "success",
-        "message": "DFMEA run complete",
-        "output_file": output_path
+        "output_file_url": f"http://localhost:8000/files/{filename}"
     }
