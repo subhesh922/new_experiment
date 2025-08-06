@@ -18,12 +18,19 @@ def run_dfmea(req: DFMEARequest):
     fi_path = "server/sample_files/fi_input.xlsx" if "xlsx" in req.fi_url else "server/sample_files/fi_input.csv"
 
     os.makedirs("server/sample_files", exist_ok=True)
+import shutil
 
-    def download(url, path):
+def download(url, path):
+    if url.lower().startswith("http"):
+        # It is a real web URL
         r = requests.get(url)
         r.raise_for_status()
         with open(path, "wb") as f:
             f.write(r.content)
+    else:
+        # It's a local file path → copy it
+        shutil.copy(url, path)
+
 
     download(req.kb_url, kb_path)
     download(req.fi_url, fi_path)
