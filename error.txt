@@ -1,64 +1,4 @@
-(dfmea_env) C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA>cd C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea              
- 
-(dfmea_env) C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea>uvicorn server.main:app --reload
-INFO:     Will watch for changes in these directories: ['C:\\Users\\AS9969\\Desktop\\Ashish Work Folder\\DFMEA\\dfmea']
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [27732] using WatchFiles
-Process SpawnProcess-1:
-Traceback (most recent call last):
-  File "C:\Program Files\Python312\Lib\multiprocessing\process.py", line 314, in _bootstrap
-    self.run()
-  File "C:\Program Files\Python312\Lib\multiprocessing\process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
-    target(sockets=sockets)
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\uvicorn\server.py", line 66, in run      
-    return asyncio.run(self.serve(sockets=sockets))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python312\Lib\asyncio\runners.py", line 195, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python312\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python312\Lib\asyncio\base_events.py", line 691, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\uvicorn\server.py", line 70, in serve    
-    await self._serve(sockets)
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\uvicorn\server.py", line 77, in _serve   
-    config.load()
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\uvicorn\config.py", line 435, in load    
-    self.loaded_app = import_from_string(self.app)
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\uvicorn\importer.py", line 19, in import_from_string
-    module = importlib.import_module(module_str)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python312\Lib\importlib\__init__.py", line 90, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
-  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
-  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\server\main.py", line 55, in <module>
-    app.mount("/files", StaticFiles(directory="server/output"), name="files")
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\starlette\staticfiles.py", line 56, in __init__
-    raise RuntimeError(f"Directory '{directory}' does not exist")
-RuntimeError: Directory 'server/output' does not exist
-INFO:     Stopping reloader process [27732]
-
-(dfmea_env) C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea>uvicorn server.main:app --reload
-INFO:     Will watch for changes in these directories: ['C:\\Users\\AS9969\\Desktop\\Ashish Work Folder\\DFMEA\\dfmea']
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [6332] using WatchFiles
-INFO:     Started server process [33464]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     127.0.0.1:65034 - "POST /run_dfmea HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:52195 - "POST /run_dfmea HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 409, in run_asgi
@@ -129,15 +69,10 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\requests\sessions.py", line 589, in request
     resp = self.send(prep, **send_kwargs)
-    resp = self.send(prep, **send_kwargs)
-    resp = self.send(prep, **send_kwargs)
-    resp = self.send(prep, **send_kwargs)
-    resp = self.send(prep, **send_kwargs)
-    resp = self.send(prep, **send_kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\requests\sessions.py", line 697, in send 
     adapter = self.get_adapter(url=request.url)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\AS9969\Desktop\Ashish Work Folder\DFMEA\dfmea\dfmea_env\Lib\site-packages\requests\sessions.py", line 792, in get_adapter
     raise InvalidSchema(f"No connection adapters were found for {url!r}")
-requests.exceptions.InvalidSchema: No connection adapters were found for 'C:\\Users\\AS9969\\Desktop\\Ashish Work Folder\\DFMEA\\dfmea\\server\\sample_files\\dfmea_knowledge_bank_3.csv'
+requests.exceptions.InvalidSchema: No connection adapters were found for 'C:/Users/AS9969/Desktop/Ashish Work Folder/DFMEA/dfmea/server/sample_files/dfmea_knowledge_bank_3.csv'
