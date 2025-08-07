@@ -1,13 +1,8 @@
-[VectorStoreAgent] Creating collection 'dfmea_collection_a07fa1e3'...
-[VectorStoreAgent] Created session collection: dfmea_collection_a07fa1e3
-[VectorStoreAgent] Uploading 3016 vectors in batches...
-[VectorStoreAgent] Batch 1 failed: ResponseHandlingException: The write operation timed out
-[VectorStoreAgent] Batch 3 failed: ResponseHandlingException: The write operation timed out
-[VectorStoreAgent] Batch 4 failed: ResponseHandlingException: The write operation timed out
-[VectorStoreAgent] Batch 5 failed: ResponseHandlingException: The write operation timed out
-[VectorStoreAgent] Batch 6 failed: ResponseHandlingException: The write operation timed out
-[VectorStoreAgent] Upload complete.
-[DFMEAPipeline] Starting DFMEA generation pipeline...
-[ContextAgent] Searching Qdrant for: Generate DFMEA entries for recent field failures
-[VectorStoreAgent] Searching for: 'Generate DFMEA entries for recent field failures' in 'dfmea_collection_a07fa1e3'
-[VectorStoreAgent] Found 100 matches.
+[ContextAgent] Parsed 42 DFMEA entries.
+
+[WriterAgent] Writing DFMEA output to: output/dfmea_output.xlsx
+[WriterAgent] Raw DFMEA JSON dumped to: output/raw_dfmea_output.json
+[WriterAgent] Excel file saved with 66 rows.
+
+INFO:     127.0.0.1:55452 - "POST /run_dfmea HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61279 - "GET /files/dfmea_output.xlsx HTTP/1.1" 404 Not Found
