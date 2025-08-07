@@ -1,0 +1,13 @@
+[VectorStoreAgent] Creating collection 'dfmea_collection_a07fa1e3'...
+[VectorStoreAgent] Created session collection: dfmea_collection_a07fa1e3
+[VectorStoreAgent] Uploading 3016 vectors in batches...
+[VectorStoreAgent] Batch 1 failed: ResponseHandlingException: The write operation timed out
+[VectorStoreAgent] Batch 3 failed: ResponseHandlingException: The write operation timed out
+[VectorStoreAgent] Batch 4 failed: ResponseHandlingException: The write operation timed out
+[VectorStoreAgent] Batch 5 failed: ResponseHandlingException: The write operation timed out
+[VectorStoreAgent] Batch 6 failed: ResponseHandlingException: The write operation timed out
+[VectorStoreAgent] Upload complete.
+[DFMEAPipeline] Starting DFMEA generation pipeline...
+[ContextAgent] Searching Qdrant for: Generate DFMEA entries for recent field failures
+[VectorStoreAgent] Searching for: 'Generate DFMEA entries for recent field failures' in 'dfmea_collection_a07fa1e3'
+[VectorStoreAgent] Found 100 matches.
