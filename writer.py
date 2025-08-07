@@ -4,6 +4,7 @@ import os
 import json
 import pandas as pd
 from typing import List, Dict
+import time 
 
 class WriterAgent:
     def __init__(self, output_path: str = "output/dfmea_output.xlsx", json_dump_path: str = "output/raw_dfmea_output.json"):
@@ -65,16 +66,21 @@ class WriterAgent:
 
     def run(self, dfmea_json: List[Dict]) -> str:
         print(f"[WriterAgent] Writing DFMEA output to: {self.output_path}")
-
+    
         # Save raw JSON for debugging
         os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
         with open(self.json_dump_path, "w") as f:
             json.dump(dfmea_json, f, indent=2)
         print(f"[WriterAgent] Raw DFMEA JSON dumped to: {self.json_dump_path}")
-
+    
         # Flatten and write Excel
         df = self._flatten_dfmea(dfmea_json)
         df.to_excel(self.output_path, index=False)
+    
+        # ⚠️ Add small wait to ensure file is fully written before FastAPI serves it
+        time.sleep(0.5)
+    
         print(f"[WriterAgent] Excel file saved with {len(df)} rows.\n")
-
+    
         return self.output_path
+
