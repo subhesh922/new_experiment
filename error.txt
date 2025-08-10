@@ -3,6 +3,10 @@ from qdrant_client import QdrantClient
 qdrant_client = QdrantClient(
     url="https://ad2cab77-9c04-4c82-acad-c2e1def37873.us-west-1-0.aws.cloud.qdrant.io:6333", 
     api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0._bv7FpsbU0PpV9qZA2-Ze44MS8HsZTQOuOwfcjQw2pM",
+    prefer_grpc=False,  # Make HTTP-based async fallback smoother
+    https=True,
+    timeout=120,#incresed from 30 standard to 120 for better timeout handeling 
+    verify=False
 )
 
 print(qdrant_client.get_collections())
