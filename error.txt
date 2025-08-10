@@ -10,3 +10,37 @@ qdrant_client = QdrantClient(
 )
 
 print(qdrant_client.get_collections())
+
+
+
+
+
+
+################################################################################
+
+from qdrant_client import QdrantClient
+from qdrant_client.http import models
+
+client = QdrantClient(
+    url="https://ad2cab77-9c04-4c82-acad-c2e1def37873.us-west-1-0.aws.cloud.qdrant.io:6333",
+    api_key="YOUR_API_KEY",
+    prefer_grpc=False,
+    https=True,
+    timeout=120,
+    verify=False  # switch to a certifi-based verify when you’re done testing
+)
+
+COLL = "dfmea_collection"
+
+# Create if missing (idempotent)
+if not client.collection_exists(COLL):
+    client.create_collection(
+        collection_name=COLL,
+        vectors_config=models.VectorParams(
+            size=768,                         # ← change to your embedding size
+            distance=models.Distance.COSINE   # good default for text embeddings
+        )
+    )
+
+print(client.get_collections())  # should now list dfmea_collection
+
